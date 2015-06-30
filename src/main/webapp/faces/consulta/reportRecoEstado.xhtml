@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/template1.xhtml">
+
+	<ui:define name="titulo-report">
+        
+        Reporte - Recomendaciones por Estado - Generales
+    </ui:define>
+	
+	<ui:define name="insert-filtro">
+		<f:event type="preRenderView" listener="#{recoEstController.init}" />  
+		<div class="form-group has-feedback">
+			<label style="font-size: 13px;" class="col-sm-2 control-label">Proyecto</label>
+			<div class="col-sm-3">
+				<h:selectOneMenu styleClass="form-control" id="empresa"
+					value="#{recoEstController.idEmpresa}">
+					<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+				</h:selectOneMenu>
+			</div>
+			<label style="font-size: 13px;" class="col-sm-2 control-label">Origen</label>
+			<div class="col-sm-3">
+				<h:selectOneMenu id="origen" styleClass="form-control"
+					value="#{recoEstController.idIncidencia}">
+					<f:selectItem itemLabel="Seleccionar" itemValue="0" />
+				</h:selectOneMenu>
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label style="font-size: 13px;" class="col-sm-2 control-label">A la fecha 				
+                	<i  style="color: red;font-size: 20px;font-weight: bold;">*</i>
+            	</label> 
+			 
+			<div class="col-sm-3">
+				<p:calendar style="font-size: 13px;" navigator="true" locale="es" label="A la fecha"
+					id="datetime" showOn="button" pattern="dd/MM/yyyy" mask="true"
+					value="#{recoEstController.dtAnyDay}" required="true" />
+				<p:message for="datetime" />
+
+			</div>
+		</div>
+		<div class="form-group has-feedback">		
+			<div class="col-sm-5"/>
+			<div class="col-sm-2">
+				<p:commandButton ajax="false" value="Exportar" style="width: 100%;"
+					styleClass="btn btn-primary" action="#{recoEstController.search}">
+				</p:commandButton>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
